@@ -1,31 +1,32 @@
 import { useState, type ChangeEvent, type FormEvent } from "react"
 
 type AddCategoryProps = {
-  setCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  onNewCategory: (newCategory: string) => void;
 };
 
-export const AddCategory = ({ setCategories }: AddCategoryProps) => {
-  const [inputValue, setInputValue] = useState('Tails');
 
-  const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
+export const AddCategory = ({ onNewCategory }: AddCategoryProps) => {
+    const [inputValue, setInputValue] = useState('Tails');
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if ( inputValue.trim().length <= 1) return;
-    setCategories(categories => [...categories, inputValue]);
-    setInputValue('');
-  };
+    const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value);
+    };
 
-  return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="text"
-        placeholder="Buscar Gifs"
-        value={inputValue}
-        onChange={onInputChange}
-      />
-    </form>
-  );
+    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (inputValue.trim().length <= 1) return;
+        onNewCategory(inputValue.trim());
+        setInputValue('');
+    };
+
+    return (
+        <form onSubmit={onSubmit}>
+            <input
+                type="text"
+                placeholder="Buscar Gifs"
+                value={inputValue}
+                onChange={onInputChange}
+            />
+        </form>
+    );
 };

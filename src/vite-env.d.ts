@@ -2,6 +2,8 @@
 
 // Para permitir importar archivos .css
 declare module '*.css';
+declare module '*.js';
+
 
 // Si en el futuro usás CSS Modules (por ejemplo: styles.module.css), agregá esto:
 declare module '*.module.css' {
